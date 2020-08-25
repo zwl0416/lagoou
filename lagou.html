@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            font-size: 26.6666667vw;
+        }
+
+        body {
+            font-size: .16rem;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #555555;
+        }
+
+        h2 {
+            height: 0.45rem;
+            background: #00b38a;
+            font-size: 0.18rem;
+            text-align: center;
+            line-height: 0.45rem;
+            color: white;
+        }
+
+        .position,
+        .search,
+        .ge {
+
+            height: 5.5rem;
+            border: 0.01rem solid #ccc;
+            background: #fff;
+        }
+
+        .top {
+
+            height: 5.5rem;
+            overflow: auto;
+            /* background: #f0f; */
+        }
+
+        .top li {
+
+            height: 0.66rem;
+            padding: 0.1rem;
+            padding-top: 0.12rem;
+            /* background: powderblue; */
+            border-top: 0.01rem solid #ccc;
+        }
+
+        .top li span {
+            display: block;
+
+            height: 0.3rem;
+            line-height: 0.3rem;
+            /* background: pink; */
+            margin-left: 0.5rem;
+        }
+
+        .top li b {
+            float: left;
+
+            height: 0.3rem;
+            line-height: 0.3rem;
+            font-weight: normal;
+            font-size: 0.12rem;
+            /* background: peru; */
+            margin-left: 0.5rem;
+        }
+
+        .top li strong {
+            float: right;
+
+            height: 0.3rem;
+            text-align: right;
+            line-height: 0.3rem;
+            font-weight: normal;
+            color: green;
+            /* background: plum; */
+            margin-top: -0.1rem;
+        }
+
+        .top p span {
+            float: left;
+
+            height: 0.49rem;
+            line-height: 0.5rem;
+            text-align: center;
+            background: #fff;
+            border-bottom: 0.01rem solid #ccc;
+        }
+
+        .top p input {
+
+            height: 0.48rem;
+            border: 0.01rem solid #ccc;
+            padding-left: 0.1rem;
+            font-size: 0.16rem;
+        }
+
+        .top .login {
+
+            height: 0.5rem;
+            line-height: 0.5rem;
+            text-align: center;
+            border: 0;
+            color: #fff;
+            background: #1FC8A1;
+            font-size: 0.14rem;
+            margin: 0.8rem 0 0.5rem 1.4rem;
+        }
+
+        .top ul li {
+            float: left;
+            width: 1.2rem;
+            height: 0.7rem;
+            line-height: 0.7rem;
+            text-align: center;
+            color: #fff;
+            background: #1FC8A1;
+            list-style: none;
+            margin: 0.2rem 0 0 0.2rem;
+        }
+
+        .tit {
+            width: 100%;
+            height: 0.45rem;
+            border-top: 0.01rem #e8e8e8 solid;
+            position: fixed;
+            bottom: 0;
+            background: #f6f6f6;
+            display: flex;
+            line-height: 0.45rem;
+        }
+
+        .tit li {
+            flex: 1;
+            text-align: center;
+            height: 100%;
+            color: #555555;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>拉勾网</h2>
+
+        <component :is="getTab"></component>
+
+        <ul class="tit">
+            <li v-for="item in msg" @click="handleClick(item)">{{item.title}}</li>
+        </ul>
+    </div>
+
+    <script>
+
+        Vue.component("custom-position", {
+            data() {
+                return {
+                    list: [
+                        { "id": 1, "title": "赢时胜软件", "small": "核算会计(上海)[上海]", "price": "4k-6k" },
+                        { "id": 2, "title": "四川驰驭行汽车租赁", "small": "客户经理[成都]", "price": "15k-30k" },
+                        { "id": 3, "title": "Trusfort芯盾时代", "small": "大数据解决方案专家[北京]", "price": "15k-30k" },
+                        { "id": 4, "title": "Trusfort芯盾时代", "small": "项目经理[北京]", "price": "15k-30k" },
+                        { "id": 5, "title": "洋码头", "small": "活动运营策划[上海]", "price": "7k-12k" },
+                        { "id": 6, "title": "Xeno Dynamics", "small": "产品结构工程师[深圳]", "price": "12k-20k" },
+                        { "id": 6, "title": "Xeno Dynamics", "small": "产品结构工程师[深圳]", "price": "12k-20k" },
+                        { "id": 6, "title": "Xeno Dynamics", "small": "产品结构工程师[深圳]", "price": "12k-20k" },
+                        { "id": 6, "title": "Xeno Dynamics", "small": "产品结构工程师[深圳]", "price": "12k-20k" }
+                    ]
+                }
+            },
+            template: `
+            <div class="position">
+                <ul class="top">
+                    <li v-for="items in list">
+                        <span>{{items.title}}</span>
+                        <b>{{items.small}}</b>
+                        <strong>{{items.price}}</strong>
+                    </li>
+                </ul>
+            </div>
+            `
+        });
+
+        Vue.component("custom-search", {
+            template: `
+            <div class="search">
+                <div class="top">
+                    <p>
+                        <span>全国</span>
+                        <input type="text" placeholder="搜索职位或公司">
+                    </p>
+                </div>
+            </div>
+            `
+        });
+
+        Vue.component("custom-my", {
+            template: `
+            <div class="ge">
+                <div class="top">
+                    <button class="login">登录 / 注册</button>
+                    <ul>
+                        <li>投递</li>
+                        <li>面试</li>
+                        <li>邀约</li>
+                        <li>收藏</li>
+                    </ul>
+                </div>
+            </div>
+            `
+        })
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                msg: [
+                    { "id": "position", "title": "职位" },
+                    { "id": "search", "title": "搜索" },
+                    { "id": "my", "title": "我的" }
+                ],
+                current: "position"
+            },
+            computed: {
+                getTab() {
+                    return "custom-" + this.current;
+                }
+            },
+            methods: {
+                handleClick(item) {
+                    this.current = item.id
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
